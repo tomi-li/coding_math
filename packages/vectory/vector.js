@@ -44,4 +44,41 @@ module.exports = class Vector {
   getAngle() {
     return Math.atan2(this._y, this._x);
   }
+
+  add(x, y) {
+    return Vector.create(x + this._x, y + this._y);
+  }
+
+  addTo(x, y) {
+    this._x += x;
+    this._y += y;
+  }
+
+  substract(x, y) {
+    return Vector.create(x - this._x, y - this._y);
+  }
+
+  substractFrom(x, y) {
+    this._x -= x;
+    this._y -= y;
+  }
+
+  multiply(num) {
+    return Vector.create(this._x * num, this._y * num);
+  }
+
+  multiplyTo(num) {
+    this._x *= num;
+    this._y *= num;
+  }
+
+  devide(num) {
+    return Vector.create(this._x / num, this._y / num);
+  }
+
+  devideBy(num) {
+    this._x /= num;
+    this._y /= num;
+  }
+
 };
