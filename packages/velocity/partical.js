@@ -9,6 +9,10 @@ class Partical {
     this.velocity = velocity;
   }
 
+  acclerate(accl) {
+    this.velocity.addTo(accl.getX(), accl.getY());
+  }
+
   update() {
     this.position.addTo(this.velocity.getX(), this.velocity.getY());
   }
