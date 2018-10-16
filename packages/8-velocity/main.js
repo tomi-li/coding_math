@@ -13,7 +13,7 @@ window.onload = () => {
   function update() {
     context.clearRect(0, 0, width, height);
     for (const p of ps) {
-      p.acclerate(accl);
+      p.accelerate(accl);
       p.update();
       context.beginPath();
       context.arc(p.position.getX(), p.position.getY(), 3, 0, 2 * Math.PI);
