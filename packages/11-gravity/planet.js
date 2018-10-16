@@ -13,7 +13,7 @@ class Planet extends Partical {
     grav.setLength(p2.mass / dist ** 2);
     grav.setAngle(this.angleTo(p2));
 
-    this.velocity.addTo(grav)
+    this.velocity.addTo(grav.getX(), grav.getY());
   }
 
 }
