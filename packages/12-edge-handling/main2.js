@@ -5,14 +5,12 @@ window.onload = () => {
     width = canvas.width = window.innerWidth,
     height = canvas.height = window.innerHeight;
 
-  const accl = new Vector(0, 0.1);
-  const ps = new Array(100).fill('').map(() =>
-    new Partical(width / 2, height / 3, Math.random() * 3 + 2, Math.random() * Math.PI * 2, 1)
+  let ps = new Array(100).fill('').map(() =>
+    new Partical(width / 2, height / 2, Math.random() * 4 + 2, Math.random() * Math.PI * 2)
   );
 
   function update() {
     context.clearRect(0, 0, width, height);
-
 
     for (const p of ps) {
       p.update();
@@ -21,8 +19,17 @@ window.onload = () => {
       context.fill();
     }
 
+    ps = ps.filter(each => !(
+      each.position.getX() > width ||
+      each.position.getX() < 0 ||
+      each.position.getY() > height ||
+      each.position.getY() < 0
+    ));
+    console.log(ps.length);
+
     requestAnimationFrame(update);
   }
+
 
   update();
 };

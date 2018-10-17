@@ -30,7 +30,7 @@ class Partical {
   }
 
   update() {
-    this.velocity.addTo(this.gravity.getX(), this.gravity.getX());
+    this.accelerate(this.gravity);
     this.position.addTo(this.velocity.getX(), this.velocity.getY());
   }
 }
