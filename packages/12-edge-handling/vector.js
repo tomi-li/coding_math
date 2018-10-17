@@ -9,6 +9,10 @@ class Vector {
     return new this(x, y);
   }
 
+  static clone(v){
+    return new this(v.getX(), v.getY());
+  }
+
   setX(x) {
     this._x = x;
   }
