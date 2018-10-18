@@ -17,7 +17,7 @@ window.onload = () => {
     const distance = new Vector(springPoint.getX() - p.position.getX(), springPoint.getY() - p.position.getY());
     const springForce = distance.multiply(k);
 
-    p.velocity.addTo(distance.getX(), distance.getY());
+    p.velocity.addTo(springForce.getX(), springForce.getY());
     p.update();
 
     context.beginPath();
