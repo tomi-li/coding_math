@@ -22,7 +22,7 @@ class Partical {
 
   applyFriction() {
     this.velocity.multiplyTo(1 - this.friction);
-    if (this.velocity.getLength() < 0.01) {
+    if (this.velocity.getLength() < 0.03) {
       this.velocity.setLength(0);
     }
   }
