@@ -9,6 +9,7 @@ window.onload = function() {
 
   const emitPoint = { x: width / 2, y: height };
   let slope = 0;
+  let partical;
 
   canvas.addEventListener('mousemove', e => {
     const dx = e.clientX - emitPoint.x;
@@ -16,13 +17,39 @@ window.onload = function() {
     slope = dy / dx;
   });
 
+  canvas.addEventListener('click', () => {
+    let angle = Math.atan(slope) * 180 / PI;
+    if (angle > 0) {
+      angle += 180;
+    }
+    console.log(angle);
+    partical = new Partical(emitPoint.x, emitPoint.y, 12, angle / 180 * PI);
+  });
+
   function update() {
     const y = slope * (width / 2);
     ctx.clearRect(0, 0, width, height);
 
     // calculateLength(height - Math.abs(y), width / 2);
-    drawSecondLine(y, slope * 180 / PI);
+    drawSecondLine(y, Math.atan(slope) * 180 / PI);
 
+    if (partical) {
+      partical.update();
+      drawPartical(partical);
+
+      if (partical.position.getX() > width
+        || partical.position.getX() < 0) {
+        partical.velocity.setX(-partical.velocity.getX());
+      }
+
+      if (partical.position.getY() < 0) {
+        partical.velocity.setY(-partical.velocity.getY());
+      }
+
+      if (partical.position.getY() > height) {
+        partical = null;
+      }
+    }
 
     ctx.beginPath();
     ctx.moveTo(emitPoint.x, emitPoint.y);
@@ -40,34 +67,55 @@ window.onload = function() {
     requestAnimationFrame(update);
   }
 
-
-  function drawSecondLine(y, angle) {
-    if (Math.abs(y) > height) {
-      console.log('！！！');
-      return;
-    }
-
-    const newY = (height - y);
-    // console.log(90 - angle);
-    // console.log(Math.tan(90 - angle));
-
-    // console.log(Math.tan(45 * PI / 180));
-    const x = Math.tan((90 - angle) * PI / 180) * newY;
-    console.log(x);
+  function drawPartical(p) {
     ctx.beginPath();
-    ctx.moveTo(0, newY);
-    ctx.lineTo(x, 0);
-    ctx.stroke();
-    // console.log(y, x);
+    ctx.arc(p.position.getX(), p.position.getY(), 10, 0, 2 * PI);
+    ctx.fill();
   }
 
-  function calculateLength(height, width) {
-    console.log(height);
-    if (height < 0) {
 
+  function drawSecondLine(y, angle) {
+    if (angle > 0) {
+      const newY = (height - y);
+
+      console.log(newY);
+      if (newY < 0) {
+        console.log('！！！');
+        return;
+      }
+
+      const x = Math.tan((90 - angle) * PI / 180) * newY;
+      ctx.beginPath();
+      ctx.moveTo(0, newY);
+      ctx.lineTo(x, 0);
+      ctx.stroke();
+
+      // help line
+      ctx.beginPath();
+      ctx.moveTo(0, newY);
+      ctx.lineTo(width, newY);
+      ctx.stroke();
+    } else {
+      const newY = (height + y);
+
+      if (newY < 0) {
+        console.log('！！！');
+        return;
+      }
+
+      const x = Math.tan((90 + angle) * PI / 180) * newY;
+      ctx.beginPath();
+      ctx.moveTo(width, newY);
+      ctx.lineTo(width - x, 0);
+      ctx.stroke();
+
+      // help line
+      ctx.beginPath();
+      ctx.moveTo(0, newY);
+      ctx.lineTo(width, newY);
+      ctx.stroke();
     }
   }
 
   update();
-
 };
