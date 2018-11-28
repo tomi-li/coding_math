@@ -98,9 +98,7 @@ window.onload = () => {
         dx = face.p3.x - face.p0.x,
         dy = face.p3.y - face.p0.y,
         angle = Math.atan2(dy, dx),
-        length = Math.sqrt(dx ** 2, dy ** 2);
-
-      console.log(length);
+        length = Math.sqrt(dx ** 2 + dy ** 2);
 
       context.save();
       context.translate(face.p0.x, face.p0.y);
@@ -122,4 +120,9 @@ window.onload = () => {
   }
 
   update();
+
+  window.addEventListener('click', (e)=>{
+    points[6].x = e.clientX;
+    points[6].y = e.clientY;
+  })
 };
