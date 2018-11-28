@@ -121,7 +121,7 @@ window.onload = () => {
 
   update();
 
-  window.addEventListener('click', (e)=>{
+  window.addEventListener('click', (e) => {
     points[6].x = e.clientX;
     points[6].y = e.clientY;
   })
