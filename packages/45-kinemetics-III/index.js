@@ -1,4 +1,4 @@
-const Arm = require('./Arm');
+const IKSystem = require('./IKSystem');
 
 window.onload = () => {
   const
@@ -7,15 +7,19 @@ window.onload = () => {
     width = canvas.width = drawingCanvas.width = window.innerWidth,
     height = canvas.height = drawingCanvas.height = window.innerHeight;
 
-  const arm = new Arm(width / 2, height / 2, 100);
+  const ik = new IKSystem(width / 2, height / 2);
+
+  for (let i = 0; i < 30; i++) {
+    ik.addArm(10);
+  }
 
   window.addEventListener('mousemove', e => {
-    arm.dragTo(e.clientX, e.clientY);
+    ik.dragTo(e.clientX, e.clientY);
   });
 
   function update() {
     context.clearRect(0, 0, width, height);
-    arm.render(context);
+    ik.render(context);
     requestAnimationFrame(update);
   }
 

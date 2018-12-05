@@ -26,6 +26,9 @@ class Arm {
     this.pointTo(x, y);
     this.x = x - Math.cos(this.angle) * this.length;
     this.y = y - Math.sin(this.angle) * this.length;
+    if (this.parent) {
+      this.parent.dragTo(this.x, this.y);
+    }
   }
 
   render(context) {
