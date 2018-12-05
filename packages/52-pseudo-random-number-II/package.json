@@ -1,0 +1,14 @@
+{
+  "name": "43-kinemetic-i",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "run": "webpack-dev-server --hot"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "seedrandom": "^2.4.4"
+  }
+}
