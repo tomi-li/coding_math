@@ -84,7 +84,7 @@ window.onload = async () => {
     const avgBlock = blocks.map(block => avgObj(block));
     for (let i = 0; i < blocks.length; i++) {
       mosaicContext.fillStyle = `rgba(${avgBlock[i][0]},${avgBlock[i][1]},${avgBlock[i][2]})`;
-      if(i === 72){
+      if (i === 72) {
         mosaicContext.fillStyle = `rgba(255, 0, 0)`;
       }
       mosaicContext.fillRect((i * size) % width, Math.floor((i * size) / width), size, size);
